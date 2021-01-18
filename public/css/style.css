@@ -1,0 +1,33 @@
+/* Global */
+.navbar {
+    background-color: red;
+}
+
+button {
+    margin-top: 2%;
+}
+
+.pageTitle, .main {
+
+    margin-top: 5%;
+    text-align: center;
+}
+
+.card {
+
+    color: black;
+}
+
+.card-body {
+    padding: 0;
+}
+
+.required {
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.alert {
+
+    text-align: center;
+}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Player - myYoutube{% endblock %}
+
+{% block pageTitle %}Lecture de la vidéo {{ youtubeVideo.name }}{% endblock %}
+
+{% block body %}
+    <div class="main">
+        <div>{{ youtubeVideo.url | youtubeVideoPlayer | raw }}</div>
+    </div>
+{% endblock %}

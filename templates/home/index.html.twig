@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil - myYoutube{% endblock %}
+
+{% block pageTitle %}Bienvenue sur ma plateforme Youtube!{% endblock %}
+
+{% block body %}
+    <div class="main">
+        {% if youtubeVideos != null %}
+            <div class="row">
+                {% for youtubeVideo in youtubeVideos %}
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
+                        <a href="{{ path('app_video', {'id':youtubeVideo.id}) }}" class="text-decoration-none">
+                            <div class="card-deck mb-3 text-center">
+                                <div class="card mb-4 box-shadow">
+                                    <div class="card-body">
+                                        <img class="card-img-top" src="{{ youtubeVideo.url | youtubeThumbnailParser }}" alt="Miniature de la vidéo"/>
+                                        <h4 class="my-0 font-weight-normal">{{ youtubeVideo.name }}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>Aucune offre disponible actuellement, merci de revenir plus tard.</p>
+        {% endif %}
+
+        <h4>Ajouter une vidéo</h4>
+        <div id="add-video" class="card">
+            {{ form(youtube_form) }}
+        </div>
+        <br>
+    </div>
+{% endblock %}

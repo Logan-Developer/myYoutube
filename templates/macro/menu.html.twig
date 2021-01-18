@@ -1,0 +1,18 @@
+{% macro menu(pageTitle) %}
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand text-white" href="{{ path('app_home') }}#">MyYoutube</a>
+            <button class="navbar-toggler bg-white" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" aria-current="page" href="{{ path('app_home') }}#add-video">Inscription</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+{% endmacro %}
