@@ -65,4 +65,70 @@ class HomeController extends AbstractController
             'youtubeVideo' => $repository->findOneBy(['id'=>$id])
         ]);
     }
+
+    /**
+     * @Route("/video/{id}/modify", name="app_video_modify", methods={"GET","PUT"})
+     * @param YoutubeRepository $repository
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param $id
+     * @return Response
+     */
+    public function modifyVideo(YoutubeRepository $repository, Request $request, EntityManagerInterface $entityManager, $id): Response
+    {
+        $youtubeVideo = $repository->findOneBy(['id' => $id]);
+
+
+        $youtubeForm = $this->createForm(YoutubeType::class, $youtubeVideo, ['method'=>'PUT']);
+        $youtubeForm->handleRequest($request);
+
+        if ($youtubeForm->isSubmitted()) {
+
+            if ($youtubeForm->isValid()) {
+                try {
+                    $entityManager->persist($youtubeVideo);
+                    $entityManager->flush();
+                    $this->addFlash('success', 'Vidéo modifiée avec succès!');
+
+                } catch (Exception $e) {
+                    $this->addFlash('danger', self::ERROR_MSG);
+                }
+            } else {
+                $this->addFlash('danger', self::ERROR_MSG);
+            }
+        }
+
+        return $this->render('home/modify.html.twig', [
+            'youtube_form' => $youtubeForm->createView(),
+            'youtubeVideo' => $youtubeVideo
+        ]);
+    }
+
+    /**
+     * @Route("/video/{id}/delete", name="app_video_delete", methods={"DELETE"})
+     * @param YoutubeRepository $repository
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param $id
+     * @return Response
+     */
+    public function deleteVideo(YoutubeRepository $repository, Request $request, EntityManagerInterface $entityManager, $id): Response
+    {
+        $youtubeVideo = $repository->findOneBy(['id'=>$id]);
+
+        if ($youtubeVideo !== null && $this->isCsrfTokenValid('DELETE' . $id, $request->get('_token'))) {
+            try {
+                $entityManager->remove($youtubeVideo);
+                $entityManager->flush();
+                $this->addFlash('success', 'Vidéo supprimée avec succès!');
+
+            } catch (Exception $e) {
+                $this->addFlash('danger', self::ERROR_MSG);
+            }
+        } else {
+            $this->addFlash('danger', self::ERROR_MSG);
+        }
+
+        return $this->redirectToRoute('app_home');
+    }
 }

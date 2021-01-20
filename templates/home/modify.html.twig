@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil - myYoutube{% endblock %}
+
+{% block pageTitle %}Modification de la vidéo {{ youtubeVideo.name }}{% endblock %}
+
+{% block body %}
+    <div class="main">
+        <div class="card">
+            {{ form(youtube_form) }}
+        </div>
+        <br>
+    </div>
+{% endblock %}
