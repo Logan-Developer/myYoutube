@@ -17,6 +17,14 @@
                                         <img class="card-img-top" src="{{ youtubeVideo.url | youtubeThumbnailParser }}" alt="Miniature de la vidéo"/>
                                         <h4 class="my-0 font-weight-normal">{{ youtubeVideo.name }}</h4>
                                     </div>
+                                    <div class="card-footer">
+                                        <a class="btn btn-warning" href="{{ path('app_video_modify', {'id':youtubeVideo.id}) }}">Modifier</a>
+                                        <form action="{{ path('app_video_delete', {'id':youtubeVideo.id}) }}" method="post">
+                                            <button type="submit" class="btn btn-danger">Supprimer</button>
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <input type="hidden" name="_token" value="{{ csrf_token('DELETE' ~ youtubeVideo.id) }}">
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </a>

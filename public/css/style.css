@@ -7,6 +7,14 @@ button {
     margin-top: 2%;
 }
 
+.btn {
+    color: white;
+}
+
+.btn:hover {
+    color: white;
+}
+
 .pageTitle, .main {
 
     margin-top: 5%;
